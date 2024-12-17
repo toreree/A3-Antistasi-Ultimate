@@ -22,7 +22,7 @@ Example:
 params [["_item", objNull, [objNull]], "_pickUp", ["_player", player]];
 
 if (_pickUp) then {
-    if (([_player] call A3A_fnc_countAttachedObjects) > 0) exitWith {[localize "STR_A3A_Utility_Title", localize "STR_A3A_Utility_Items_Feedback_Normal"] call A3A_fnc_customHint};
+    if (([_player] getVariable ["A3A_carryingObject", false])) exitWith {[localize "STR_A3A_Utility_Title", localize "STR_A3A_Utility_Items_Feedback_Normal"] call A3A_fnc_customHint};
 
     // we need to prevent the player from carrying an object into a vehicle to prevent damage to vehicle
     private _eventIDcarry = _player addEventHandler ["GetInMan", {
@@ -45,7 +45,6 @@ if (_pickUp) then {
         _unit setVariable ['A3A_objectCarrying', nil];
         _unit allowSprint true;
         
-
     }];
 
     if (isNil {_item getVariable "A3A_originalMass"}) then { _item setVariable ["A3A_originalMass", getMass _item] };
